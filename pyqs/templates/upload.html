@@ -1,0 +1,133 @@
+{% extends 'navbar.html' %}
+
+{% block main %}
+
+
+<style>
+    #t{
+        color:black;
+    }
+    #but:hover{
+        background-color: rgb(0, 99, 99) !important;
+    }
+</style>
+
+
+
+
+<div class="card shadow p-4" style="background: transparent;">
+    <div class="card-body">
+        <h4 class="p-2" style="border-bottom: 3px solid teal; color: black;"><b>Upload</b></h4>
+    </div>
+    <div class="container-fluid">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-row" >
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label id="t" for="" ><b>Subject name</b></label>
+                        <input type="text" name= "subjectname" class="form-control" placeholder="Enter Subject name" required>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label id="t" for=""><b>Subject Code</b></label>
+                        <input type="text" name="subjectcode" class="form-control" placeholder="Enter Subject code"  required>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label id="t" for=""><b>Department</b></label>
+                        <input type="text" name="department" class="form-control" placeholder="Enter department"  required>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for=""><b>Semester(1st/2nd/3rd...)</b></label>
+                        <select name="sem123" class="form-control" >
+                            <option value="">-select-</option>
+                            <option value="1st">1st</option>
+                            <option value="2nd">2nd</option>
+                            <option value="3rd">3rd</option>
+                            <option value="4th">4th</option>
+                            <option value="5th">5th</option>
+                            <option value="6th">6th</option>
+                            <option value="7th">7th</option>
+                            <option value="8th">8th</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for=""><b>Semester(monsoon/winter/summer)</b></label>
+                        <select name="semester" class="form-control" >
+                            <option value="">-select-</option>
+                            <option value="Monsoon">Monsoon</option>
+                            <option value="Winter">Winter</option>
+                            <option value="Summer">Summer</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for=""><b>Midsem/Endsem</b></label>
+                        <select name="midend" class="form-control" >
+                            <option value="">-select-</option>
+                            <option value="Midsem">Mid-sem</option>
+                            <option value="Endsem">End-sem</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for=""><b>Subject Type</b></label>
+                        <select name="subjecttype" class="form-control" >
+                            <option value="">-select-</option>
+                            <option value="1st year">1st year</option>
+                            <option value="core">Core</option>
+                            <option value="oe">OE</option>
+                            <option value="eso">ESO</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label id="t" for="" ><b>Session</b></label>
+                        <input type="text" name="session" class="form-control" placeholder="Enter session(ex-2020-21)" required>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for=""><b>File</b></label>
+                        <input type = file name="file" class="form-control" style="border: none; background: transparent;" required>
+                    </div>
+                </div>
+                
+
+            </div>
+            <input type="submit" value="submit" id="but" class="btn btn-primary" style="background-color: teal; border: none;">
+        </form>
+    </div>
+</div>
+
+
+{% if eror == "yes" %}
+<script>
+    alert('Thank you for uploading');
+    window.location = ("{% url 'home' %}");
+</script>
+{% endif %}
+{% if eror == "no" %}
+<script>
+    alert('Something went wrong ');
+</script>
+{% endif %}
+
+
+{% endblock %}
