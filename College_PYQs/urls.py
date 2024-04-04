@@ -25,15 +25,20 @@ urlpatterns = [
     path('', index, name = "index"),
     path('home', home, name = "home"),
     path('stud_login', stud_login, name = "stud_login"),
+    path('admin_login', admin_login, name = "admin_login"),
     path('stud_signup', stud_signup, name = "stud_signup"),
     path('logout', Logout, name = "logout"),
+    path('admin_logout', admin_Logout, name = "admin_logout"),
     path('upload', upload, name = "upload"),
+    path('uploadedpyqs', uploadedpyqs, name = "uploadedpyqs"),
     path('feedback', feedback, name = "feedback"),
     path('firstyear', firstyear, name = "firstyear"),
     path('core', core, name = "core"),
     path('eso', eso, name = "eso"),
     path('oe', oe, name = "oe"),
+    path('admin_home', admin_home, name = "admin_home"),
+    path('delete_paper/<int:id>', delete_paper, name = "delete_paper"),
+    path('add_paper/<int:id>', add_paper, name = "add_paper"),
 
-    
-    
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

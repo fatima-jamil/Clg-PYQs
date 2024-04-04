@@ -1,0 +1,48 @@
+{% load static %}
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<link rel="stylesheet" href = "{% static 'css/style.css' %}">
+
+
+<body>
+    <nav style="background-color: rgb(255, 255, 255) !important; box-shadow: 2px 4px 6px rgba(0, 0, 0, .4);" class="navbar navbar-expand-md bg-dark navbar-light sticky-top">
+        <!-- Brand -->
+        <a class="navbar-brand" href="#">Navbar</a>
+      
+        <!-- Toggler/collapsibe Button -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      
+        <!-- Navbar links -->
+        <div style="display: flex; justify-content: right;" class="collapse navbar-collapse " id="collapsibleNavbar">
+          <ul class="navbar-nav" style="padding: 0px 10px;">
+            <li class="nav-item">
+              <a class="nav-link ac" id="pyq" href="{% url 'admin_home' %}">PYQ's</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link ac" id="upload" href="{% url 'uploadedpyqs' %}">Uploaded</a>
+            </li>
+            <li id="login" class="nav-item">
+              <a class="nav-link" href="{% url 'admin_logout' %}">Log out</a>
+            </li>
+            
+          </ul>
+        </div>
+       
+      </nav>
+
+
+      {% block main %}
+
+      {% endblock %}
+
+      
+</body>
+</html>

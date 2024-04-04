@@ -28,10 +28,38 @@ def stud_login(request):
 
 
 
+
+def admin_login(request):
+    eror = ""
+    if request.method == "POST":
+        u = request.POST['username']
+        p = request.POST['password']
+        user = authenticate(username = u, password = p)
+        if user and user.is_staff:
+            login(request,user)
+            eror = "yes"
+        else :
+            eror = "no"
+    return render(request,"admin_login.html",locals())
+
+
+
+
+
+
 def home(request):
     if not request.user.is_authenticated:
         return redirect("stud_login")
     return render(request,"home.html")
+
+
+def admin_home(request):
+    if not request.user.is_authenticated:
+        return redirect("admin_login")
+    return render(request,"admin_home.html")
+
+
+
 
 def upload(request):
     if not request.user.is_authenticated:
@@ -54,6 +82,9 @@ def upload(request):
         except:
             eror="no"
     return render(request,"upload.html" ,locals())
+
+
+
 
 def feedback(request):
     if not request.user.is_authenticated:
@@ -85,10 +116,16 @@ def stud_signup(request):
     return render(request,"stud_signup.html" , locals())
 
 
+
+
 def Logout(request):
     logout(request)
     return redirect("index")
 
+
+def admin_Logout(request):
+    logout(request)
+    return redirect("index")
 
 
 
@@ -107,6 +144,9 @@ def firstyear(request):
         paper = pap
     
     return render(request,"firstyear.html",locals())
+
+
+
 
 
 def core(request):
@@ -162,3 +202,116 @@ def oe(request):
         paper = pap
     
     return render(request,"oe.html",locals())
+
+
+
+
+
+def uploadedpyqs(request):
+    if not request.user.is_authenticated:
+        return redirect("stud_login")
+    
+    paper = Upload.objects.all()
+    
+    # if request.method == "POST":
+    #     ses = request.POST['session']
+    #     semester = request.POST['semester']
+    #     midend = request.POST['midend']
+
+    #     pap = Firstyear.objects.all().filter(session__contains = ses, sem__contains=semester , midend__contains=midend)
+    #     paper = pap
+    
+    return render(request,"uploadedpyqs.html",locals())
+
+
+def delete_paper(request,id):
+    if not request.user.is_authenticated:
+        return redirect("admin_login")
+    
+    paper = Upload.objects.get(id = id)
+    paper.delete()
+
+    return redirect("uploadedpyqs")
+
+
+def add_paper(request,id):
+    if not request.user.is_authenticated:
+        return redirect("admin_login")
+    
+    paper = Upload.objects.get(id = id)
+
+    name = paper.sub_name
+    code = paper.sub_code
+    type = paper.sub_type
+    dep = paper.dept
+    ses = paper.session
+    semnum = paper.sem123
+    semester = paper.sem
+    mid_end = paper.midend
+    uppdf = paper.pdf
+
+    print(type)
+
+    if "year" in type:
+        try:
+            Firstyear.objects.create(
+                sub_name = name, 
+                sub_code = code,
+                session = ses,
+                sem = semester,
+                midend = mid_end,
+                pdf = uppdf
+            )
+        except:
+            print("some error ")
+
+    elif "core" in type:
+        try:
+            Core.objects.create(
+                sub_name = name, 
+                sub_code = code,
+                dept = dep,
+                session = ses,
+                sem = semnum,
+                midend = mid_end,
+                pdf = uppdf
+            )
+        except:
+            print("some error ")
+
+    elif "eso" in type:
+        try:
+            ESO.objects.create(
+                sub_name = name, 
+                sub_code = code,
+                dept = dep,
+                session = ses,
+                sem = semester,
+                midend = mid_end,
+                pdf = uppdf
+            )
+        except:
+            print("some error ")
+
+    elif "oe" in type:
+        try:
+            OE.objects.create(
+                sub_name = name, 
+                sub_code = code,
+                dept = dep,
+                session = ses,
+                sem = semester,
+                midend = mid_end,
+                pdf = uppdf
+            )
+        except:
+            print("some error ")
+
+
+
+    paper.delete()
+
+    return redirect("uploadedpyqs")
+
+
+
