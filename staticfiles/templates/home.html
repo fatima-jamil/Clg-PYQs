@@ -1,0 +1,100 @@
+{% extends 'navbar.html' %}
+
+
+
+
+
+{% block main %}
+
+
+
+<style>
+    #y {
+        border-radius: 20px;
+        background-color: rgb(78, 97, 100);
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    #hy {
+        text-align: center;
+        font-size: 4vh;
+        font-weight: bold;
+        color: rgb(255, 255, 255);
+    }
+
+    #py {
+        text-align: center;
+        font-size: 2vh;
+    }
+    #y:hover{
+        box-shadow: 4px 4px 12px rgb(56, 55, 55) !important;
+        background-color: rgb(58, 72, 74) ;
+    }
+</style>
+
+
+<div class="card pt-5 " style="border: none; background: transparent;">
+    <div class="card-body">
+        <h1
+            style=" text-align: center; font-size: 8vh; font-weight: bold; color: rgb(78, 97, 100);">
+            Previous Year Question Papers</h1>
+    </div>
+</div>
+
+<div class="card p-2 mx-2" style="border: none ; background: transparent; ">
+    <div class="card-body">
+        <div class="row" style=" display: grid; grid-template-columns: repeat(auto-fit, minmax(500px,1fr));">
+
+            <div id="y" class="card shadow m-4">
+                <a class="stretched-link" href="{% url 'firstyear' %}" style="text-decoration: none;">
+                    <div class="card-body">
+                        <h2 id="hy">1st Year</h2>
+                    </div>
+                </a>
+            </div>
+
+
+          
+
+
+            <div id="y" class="card shadow m-4">
+                <a class="stretched-link" href="{% url 'core' %}" style="text-decoration: none;">
+                    <div class="card-body">
+                        <h2 id="hy">Core Subjects</h2>
+                    </div>
+                </a>
+            </div>
+
+
+            <div id="y" class="card shadow m-4">
+                <a class="stretched-link" href="{% url 'eso' %}" style="text-decoration: none;">
+                    <div class="card-body">
+                        <h2 id="hy">ESO</h2>
+                    </div>
+                </a>
+            </div>
+
+
+            <div id="y" class="card shadow m-4">
+                <a class="stretched-link" href="{% url 'oe' %}" style="text-decoration: none;">
+                    <div class="card-body">
+                        <h2 id="hy">OE (Open Elective)</h2>
+                    </div>
+                </a>
+            </div>
+
+
+            
+
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}

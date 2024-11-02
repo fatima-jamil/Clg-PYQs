@@ -128,8 +128,23 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
+
+import os
+from pathlib import Path
+
+# Set the base directory
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+# URL for static files
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Add the path to your static files directory
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'pyqs'),  # Ensure the correct path to your static folder
+]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')  # Change 'staticfiles' to whatever you prefer
+
 
 
 MEDIA_URL = '/media/'

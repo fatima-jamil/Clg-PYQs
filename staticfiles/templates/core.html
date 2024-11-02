@@ -1,0 +1,163 @@
+{% extends 'navbar.html' %}
+
+{% block main %}
+
+
+<div class="card shadow m-5 p-3 " style="background: transparent;">
+    
+    <div class="container-fluid">
+        <form method="post" name = "entry">
+            {% csrf_token %}
+            <div class="form-row">
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for=""><b>Department</b></label>
+                        <select name="department" class="form-control" >
+                            <option value="">All</option>
+                            <option value="Computer Science Engineering">Computer Science Engineering</option>
+                            <option value="Mining Engineering">Mining Engineering</option>
+                            
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for=""><b>Session</b></label>
+                        <select name="session" class="form-control" >
+                            <option value="">All</option>
+                            <option value="2020-21">2020-21</option>
+                            <option value="2021-22">2021-22</option>
+                            <option value="2022-23">2022-23</option>
+                            <option value="2023-24">2023-24</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for=""><b>Semester</b></label>
+                        <select name="semester" class="form-control" >
+                            <option value="">All</option>
+                            <option value="3rd">3rd</option>
+                            <option value="4th">4th</option>
+                            <option value="5th">5th</option>
+                            <option value="6th">6th</option>
+                            <option value="7th">7th</option>
+                            <option value="8th">8th</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for=""><b>Midsem/Endsem</b></label>
+                        <select name="midend" class="form-control" >
+                            <option value="">All</option>
+                            <option value="Midsem">Mid-sem</option>
+                            <option value="Endsem">End-sem</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <a href=""><input type="submit" value="Submit" id="but" class="btn btn-primary" style="background-color: teal; border: none;"></a>
+        </form>
+    </div>
+</div>
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+
+<script>
+    $(document).ready(function() {
+    $('#example').DataTable( {
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ]
+    } );
+} );
+</script>
+
+
+<style>
+    #row:hover{
+        background-color: rgb(239, 238, 238); 
+    }
+
+</style>
+
+
+
+<div class="card m-4 p-2" style="background: transparent; border: none;">
+    <div class="card-body">
+       
+        
+
+
+
+
+<div class="card shadow mx-3 p-5" style="background: transparent; font-size: 18px;">
+
+
+    <div class="" style="max-height: 60vh; overflow: auto;">
+        <table id="example" class="table table-responsive" style="justify-content: center;">
+            <thead style="background-color: rgba(0, 0, 0, .3); ">
+                <tr>
+                    <th>S.No</th>
+                    <th>Sub Name</th>
+                    <th>Sub Code</th>
+                    <th>Department</th>
+                    <th>Session</th>
+                    <th>Semester</th>
+                    <th>Mid/end-sem</th>
+                    <th>View</th>
+                    <th>Download</th>
+                    
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in paper %}
+                <tr id="row">
+                    <td>{{forloop.counter}}</td>
+                    <td>{{i.sub_name}}</td>
+                    <td>{{i.sub_code}}</td>
+                    <td>{{i.dept}}</td>
+                    <td>{{i.session}}</td>
+                    <td>{{i.sem}}</td>
+                    <td>{{i.midend}}</td>
+                    <td>
+                        <a class="btn btn-primary" href="{{i.pdf.url}}" target="_blank" rel="noopener noreferrer">View</a>
+                    </td>
+                    <td>
+                        <a class="btn btn-primary" href="{{i.pdf.url}}" download="">Download</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+{% endblock %}
